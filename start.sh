@@ -17,7 +17,7 @@ if ! pm2 list | grep -q "Atmos-server"; then
 else
 
     echo "Restarting server..."
-    pm2 restart "Atmos-server" || echo "Failed to restart Atmos-server"
+    pm2 restart "Atmos-server" || echo "Failed to restart server"
     pm2 save
     explorer.exe "http://localhost:8000/$php_file"
 

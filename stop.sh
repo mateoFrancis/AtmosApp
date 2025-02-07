@@ -1,9 +1,9 @@
 #!/bin/bash
 
-# Check if the server is running
+# check if the server is running
 if pm2 list | grep -q "Atmos-server"; then
 
-    echo "Server is running. Stopping the server..."
+    echo "Stopping the server..."
     
     # stop the server 
     pm2 stop "Atmos-server"
