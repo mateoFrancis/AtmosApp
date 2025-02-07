@@ -1,7 +1,7 @@
 <?php
 
 // set up api components
-$apiKey = 'a2344ccdb157cfc507fc6589b8a7893a';
+$apiKey = 'OWM-API-KEY'; // create account to get a key
 $zipCode = '90001'; // LA zip code
 $countryCode = 'US';
 $baseUrl = "https://api.openweathermap.org/data/2.5/weather?zip={$zipCode},{$countryCode}&appid={$apiKey}&units=imperial"; // Get weather in Fahrenheit
