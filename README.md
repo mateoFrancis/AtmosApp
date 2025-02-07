@@ -36,6 +36,7 @@ Your changes
 =======
 Their changes
 >>>>>>> remote/main
+```
 
 Manually remove the conflict markers (<<<<<<<, =======, >>>>>>>)
 
