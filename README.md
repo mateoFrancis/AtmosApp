@@ -6,8 +6,6 @@ Project implementing core concepts of computer networks to a web app for fire al
 ### Cloning the Repository:
 git clone https://github.com/mateoFrancis/AtmoApp
 
-## Ensure Merge Conflicts don't affect critical code
-
 ### Pushing commands
 git add filename       # Stage a specific file
 git add .             # Stage all changes
@@ -22,15 +20,15 @@ git stash              # Stash local changes before pulling or pushing
 git pull origin main   # Pull after stashing if needed
 git stash pop          # Reapply stashed changes after pulling
                        # Push
-
+### Ensure Merging Conflicts don't affect critical code
 ## Merging Conflicts
-"<<<<<<< HEAD
+'<<<<<<< HEAD
 Your changes
 =======
 Their changes
->>>>>>> remote/main"
-## Manually remove the conflict markers (<<<<<<<, =======, >>>>>>>)
-## Push
-## If merge conflicts persist, try stashing
+>>>>>>> remote/main'
+Manually remove the conflict markers (<<<<<<<, =======, >>>>>>>)
+Push
+If merge conflicts persist, try stashing
 
 
