@@ -7,23 +7,23 @@ Project implementing core concepts of computer networks to a web app for fire al
 git clone https://github.com/mateoFrancis/AtmoApp
 
 ### Pushing commands
- git add filename         // Stage a specific file
+ git add filename  &nbsp;&nbsp;# Stage a specific file
  
- git add .                // Stage all changes
+ git add .                &nbsp;&nbsp;# Stage all changes
  
- git commit -m "your message here"    # Commit changes
+ git commit -m "your message here"    &nbsp;&nbsp;# Commit changes
  
- git push origin main     # Push to GitHub
+ git push origin main     &nbsp;&nbsp;# Push to GitHub
 
 ### Pulling commands
 git pull origin main
 
 ### Stashing commands 
-git stash                 # Stash local changes before pulling or pushing
+git stash                 &nbsp;&nbsp;# Stash local changes before pulling or pushing
 
-git pull origin main      # Pull after stashing if needed
+git pull origin main      &nbsp;&nbsp;# Pull after stashing if needed
 
-git stash pop             # Reapply stashed changes after pulling, then try pushing
+git stash pop             &nbsp;&nbsp;# Reapply stashed changes after pulling, then try pushing
 
 ## Merging Conflicts
 ### Ensure Merging Conflicts don't affect critical code
