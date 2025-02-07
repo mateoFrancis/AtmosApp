@@ -28,11 +28,12 @@ git stash pop          # Reapply stashed changes after pulling, then try pushing
 ## Merging Conflicts
 ### Ensure Merging Conflicts don't affect critical code
 ex:
+
 <<<<<<< HEAD <br>
 Your changes <br>
 ======= <br>
 Their changes <br>
->>>>>>> remote/main
+>>>>>>> remote/main <br>
 
 Manually remove the conflict markers (<<<<<<<, =======, >>>>>>>)
 
