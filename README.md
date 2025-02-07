@@ -10,7 +10,7 @@ git clone https://github.com/mateoFrancis/AtmoApp
 ### Pushing commands
  git add filename  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# Stage a specific file
  
- git add .                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# Stage all changes
+ git add  &nbsp .                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# Stage all changes
  
  git commit -m "your message here"    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# Commit changes
  
