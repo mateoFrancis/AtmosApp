@@ -7,9 +7,9 @@ Project implementing core concepts of computer networks to a web app for fire al
 git clone https://github.com/mateoFrancis/AtmoApp
 
 ### Pushing commands
- git add filename         # Stage a specific file
+ git add filename         // Stage a specific file
  
- git add .                # Stage all changes
+ git add .                // Stage all changes
  
  git commit -m "your message here"    # Commit changes
  
