@@ -27,18 +27,20 @@ git stash pop          # Reapply stashed changes after pulling, then try pushing
 
 ## Merging Conflicts
 ### Ensure Merging Conflicts don't affect critical code
-ex:
-
-<<<<<<< HEAD <br>
-Your changes <br>
-======= <br>
-Their changes <br>
->>>>>>> remote/main <br>
 
 Manually remove the conflict markers (<<<<<<<, =======, >>>>>>>)
 
 Then push
 
 If merge conflicts persist, try stashing
+
+ex:
+
+```text
+<<<<<<< HEAD
+Your changes
+=======
+Their changes
+>>>>>>> remote/main
 
 
