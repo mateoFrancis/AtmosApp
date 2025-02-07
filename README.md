@@ -2,7 +2,6 @@
 Project implementing core concepts of computer networks to a web app for fire alerts and warnings in California.
 
 ## Github Terminal Guide
-<br><br>
 
 ### Cloning the Repository:
 git clone https://github.com/mateoFrancis/AtmoApp
