@@ -1,0 +1,46 @@
+#sidebar{
+    height:95vh;
+    width:22.5%;
+    position:absolute;
+    background-color:#E8E8E8;
+    float:fixed;
+    right:0;
+    top:0;
+    text:#E5E5E5;
+    overflow-y: auto;
+}
+#map{
+    left:0;
+    top:0;
+    height:95vh;
+    width:77.5%;
+}
+body, html{
+    height:100%;
+    margin:0;
+    padding:0;
+    overflow-y: hidden;
+}
+
+hr.solid {
+    border-top: 3px solid #bbb;
+}
+
+p{
+    text-align:center;
+}
+
+#bottom{
+    display:flex;
+    align-items:center;
+    background-color:#FFF2AF;
+    position:absolute;
+    width:100vw;
+    height:5vh;
+    bottom:0;
+}
+
+#update{
+    font-size:20px;
+    border:10px;
+}
