@@ -1,9 +1,9 @@
 
-DROP PROCEDURE IF EXISTS insert_weather_data;
+DROP PROCEDURE IF EXISTS add_weather_data;
 
 DELIMITER //
 
-CREATE PROCEDURE insert_weather_data (
+CREATE PROCEDURE add_weather_data (
     IN in_zip_code VARCHAR(15),
     IN in_city_name VARCHAR(100),
     IN in_country_code VARCHAR(10),

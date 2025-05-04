@@ -1,8 +1,6 @@
 
 DROP TABLE IF EXISTS Weather_data;
 
-
-
 -- OpenWeatherMap table
 
 CREATE TABLE Weather_data (

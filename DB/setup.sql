@@ -1,8 +1,7 @@
 SET foreign_key_checks = 0;
 
-source tables.sql;
-
-source procedures.sql;
+source ./tables.sql;
+source ./procedures.sql;
 
 Show tables;
 
