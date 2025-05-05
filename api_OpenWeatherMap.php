@@ -28,6 +28,8 @@ function fetch_and_store_weather($zipCode) {
         return false;
     }
 
+    echo "<pre>{$response}</pre>";
+
     // data to insert
     $city_name = $weatherData['name'];
     $temperature = $weatherData['main']['temp'];
@@ -56,5 +58,5 @@ function fetch_and_store_weather($zipCode) {
     return true;
 }
 
-fetch_and_store_weather('93305');
+fetch_and_store_weather('91606');
 ?>
