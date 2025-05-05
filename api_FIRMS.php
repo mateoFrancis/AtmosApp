@@ -24,7 +24,7 @@ if (curl_errno($ch)) {
 } 
 else {
     // output response
-    echo "FIRMS api response:\n";
+    echo "<br><br> FIRMS api response:\n";
 
     echo "<pre>{$response}</pre>";
 }
