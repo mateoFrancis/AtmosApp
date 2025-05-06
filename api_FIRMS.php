@@ -3,6 +3,7 @@
 $LA_fires = []; // global array of fire records
 
 function fetchFIRMSData($daysRange) {
+
     global $LA_fires;
 
     $apiKey = '8bb5676cb3d5959ba7fcdc0d4bfe7daa';
@@ -33,7 +34,7 @@ function fetchFIRMSData($daysRange) {
         $data = str_getcsv($line);
         if (count($data) < 14) continue; 
 
-        $latitude = (float) $data[0];
+        $latitude = (float) $data[0]; //
         $longitude = (float) $data[1];
         $bright_ti4_kelvin = (float) $data[2]; 
 
@@ -59,16 +60,17 @@ function fetchFIRMSData($daysRange) {
     }
 }
 
-$days = 7;
+$days = 8;
 fetchFIRMSData($days);
 
 // print array
-foreach ($LA_fires as $index => $fire) {
+foreach ($LA_fires as $index => $fire) { // n = 0; n++
+
     echo "Fire #$index\n";
-    echo "Latitude: {$fire[0]}\n";
-    echo "Longitude: {$fire[1]}\n";
-    echo "Brightness (K): {$fire[2]}\n";
-    echo "Time (PST): {$fire[3]}\n";
-    echo "---------------------------\n";
+    echo "Latitude: {$fire[0]}\n"; // latitude LA_fires[n][0]
+    echo "Longitude: {$fire[1]}\n"; // longitude LA_fires[n][1]
+    echo "Brightness (K): {$fire[2]}\n"; // brightness LA_fires[n][2]
+    echo "Time (PST): {$fire[3]}<br>\n"; // date and time LA_fires[n][4]
+    echo "---------------------------<br>\n";
 }
 ?>
