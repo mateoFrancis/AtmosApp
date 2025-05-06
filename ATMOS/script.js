@@ -2,23 +2,24 @@
 async function initMap() {
     //creates map and marker/pin element and info window
       const { Map } = await google.maps.importLibrary("maps");
-      const LA = {
+      /*const LA = {
         north: 34.5000,
         south: 33.6000,
         west: -119.0000,
         east: -117.6000,
       };
+      */
 
       map = new Map(document.getElementById("map"), {
       center: { lat: 34.0549, lng: -118.2426 },
       zoom: 8,
       disableDefaultUI: false,
       mapTypeControl: false,
-      fullscreenControl: false,
-      restriction: {
-        latLngBounds: LA,
-        strictBounds: true
-      },
+     // fullscreenControl: false,
+      //restriction: {
+        //latLngBounds: LA,
+        //strictBounds: true
+      //},
       styles: [
         {
             "featureType": "all",

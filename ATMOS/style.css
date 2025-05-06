@@ -1,10 +1,17 @@
-body, html {
-    margin: 0;
-    padding: 0;
-    background-color: #f6f7f6;
-    height: 100%;
-    padding-bottom: 10vh;
-}
+body {
+    margin: 0; 
+    min-height: 100vh; 
+    background: linear-gradient(
+      337deg,
+      rgba(84, 39, 156, 1) 0%,
+      rgba(45, 21, 87, 1) 40%,
+      rgba(0, 0, 0, 1) 80%
+    );
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+  }
+  
 
 #content {
     position: absolute;
@@ -18,14 +25,16 @@ body, html {
 
 #logo{
     z-index: 2;
-    background-color: #105b91;
+    background-color: #000000;
     color: white;
     position:fixed;
     font-size: 1.5vw;
-    top: 0;
-    left: 0;
+    top: 2%;
+    left: 50%;
+    transform: translateX(-50%);
     Width: 12vw;
     height: 6vh;
+    font-size: 2vw;
     font-weight: bold;
     display: flex;
     align-items: center;  
@@ -40,7 +49,7 @@ body, html {
     right:0;
     width: 88vw;
     height: 6vh;
-    background-color: #105b91;
+    background-color: #000000;
     /*
     background-image: url('images/cloud.apng');
     background-size: 100% auto;
@@ -53,7 +62,7 @@ body, html {
     position:fixed;
     right:0;
     top: 6vh;
-    background-color: #ebedeb;
+   /* background-color: #ebedeb; */
     height:94vh;
     width: 15vw;
     text:#E5E5E5;
@@ -63,7 +72,7 @@ body, html {
     padding: 8px 8px 8px 32px;
     text-decoration: none;
     font-size: 25px;
-    color: #105b91;
+    color: #6d22b8;
     display: block;
     transition: 0.3s;
   }
@@ -71,7 +80,7 @@ body, html {
   #sidebar a:hover{
     color: #dce4ef;
     transition: 0.3s;
-    background-color:#105b91 ;
+    background-color:#8f40d9 ;
 
   }
 #map {
@@ -101,7 +110,7 @@ hr.solid {
 
 #legendTop{
     position:absolute;
-    background: #105b91;
+    background: #ede8f0;
     top:0vh;
     width: 5vw;
     left:0vw;
@@ -125,11 +134,11 @@ hr.solid {
     width: 75vw;
     left:0vw;
     bottom: 18vh;
-    background-color: #105b91;
+    background-color: #000000;
     position: absolute;
     height: 8vh;
     border-bottom-right-radius: 30px;
-    color: white;
+    color: rgb(255, 255, 255);
     display: flex;  
     align-items: center;
     font-family: Georgia, 'Times New Roman', Times, serif;
@@ -139,6 +148,7 @@ hr.solid {
 
 table {
     position: absolute;
+    color: white;
     top: 85vh; 
     left: 0;
     margin: 2vh 5vw;
@@ -151,6 +161,6 @@ table {
 }
 
 table, th, td {
-    border: 1px solid black;
+    /*border: 1px solid rgb(224, 20, 20);*/
   }
 
