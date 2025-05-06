@@ -86,7 +86,7 @@ body {
 #map {
     position: absolute;
     top: 5vh;
-    left: 5vw;
+    left: 15vw;
     width: 70vw;
     height: 63vh;
     border-top-right-radius: 30px;
@@ -104,8 +104,9 @@ hr.solid {
     background: #dce4ef;
     top:5vh;
     width: 5vw;
-    left:0vw;
+    left:10vw;
     height:63vh;
+    border-top-left-radius: 30px;
 }
 
 #legendTop{
@@ -113,26 +114,28 @@ hr.solid {
     background: #ede8f0;
     top:0vh;
     width: 5vw;
-    left:0vw;
+    left:0;
     height:7vh;
     color: white;
     display: flex;
     align-items: center;  
     justify-content: center; 
     font-family: Georgia, 'Times New Roman', Times, serif;
+    border-top-left-radius: 30px;
 
 }
 
 #legendTextTop{
     position:absolute;
     top: 6vh;
+    left: 10vh;
     color: black;
 }
 
 #live{
     overflow-x: overlay;
-    width: 75vw;
-    left:0vw;
+    width: 75.05vw;
+    left:10vw;
     bottom: 18vh;
     background-color: #000000;
     position: absolute;
@@ -144,13 +147,14 @@ hr.solid {
     font-family: Georgia, 'Times New Roman', Times, serif;
     flex-wrap: nowrap;
     white-space: nowrap;
+    border-bottom-left-radius: 30px;
 }
 
 table {
     position: absolute;
     color: white;
+    left:30vw;
     top: 85vh; 
-    left: 0;
     margin: 2vh 5vw;
     font-family: Georgia, 'Times New Roman', Times, serif;
     line-height: 1.6;
