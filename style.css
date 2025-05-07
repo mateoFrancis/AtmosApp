@@ -94,6 +94,7 @@ body {
     width: 70vw;
     height: 63vh;
     border-top-right-radius: 30px;
+    border-bottom-right-radius: 30px;
     padding: 30;
 }
 
@@ -111,7 +112,7 @@ hr.solid {
     left: 10vw;
     height: 63vh;
     border-top-left-radius: 30px;
-
+    border-bottom-left-radius: 30px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -160,12 +161,12 @@ hr.solid {
     white-space: nowrap;
     border-bottom-left-radius: 30px;
 }
-
+/*
 table {
     position: absolute;
     color: white;
-    left:30vw;
-    top: 85vh; 
+    left:8vw;
+    top: 75vh; 
     margin: 2vh 5vw;
     font-family: Georgia, 'Times New Roman', Times, serif;
     line-height: 1.6;
@@ -176,8 +177,8 @@ table {
 }
 
 table, th, td {
-    /*border: 1px solid rgb(224, 20, 20);*/
-  }
+    border: 1px solid rgb(224, 20, 20);
+  }*/
 
 #select{
     color: white;
@@ -192,10 +193,19 @@ table, th, td {
 }
 
 /* Table Styling */
+
 .table-wrapper {
     max-width: 100%;
     padding: 0 5vw; /* Adds horizontal breathing room */
     box-sizing: border-box;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    left:16vw;
+    width: 65vw;  
+    position: absolute;
+    top: 75vh; 
 }
 
 .myOtherTable {

@@ -2,7 +2,7 @@
 <html>
     <head>
         <link rel="stylesheet" href="./style.css">
-        <script src = "/script.js"></script>
+        <script src = "script.js"></script>
         <link rel ="icon" type="image/x-icon" href="./images/favicon02.jpg">
 
         <title id="font">ATMOS</title>
@@ -36,9 +36,32 @@
                 <img src="./fire_imgs/GreenFire.png" class="fire-icon">
             </center>
         </div>
-        
 
-        <div id = "live"> Reports: </div>
+
+        <form id="select" method="post">
+            <label for="zip">Zip code:</label>
+            <select id="zip" name="zip">
+                <?php foreach ($zipCodes as $zip): ?>
+                    <option value="<?php echo htmlspecialchars($zip); ?>"><?php echo htmlspecialchars($zip); ?></option>
+                <?php endforeach; ?>
+            </select>
+        
+            <label for="days">Fire Data Range (days)</label>
+            <select id="days" name="days">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="10">10</option>
+            </select>
+
+            <input id ='button' type="submit" value="Submit">
+        </form>
 
 
 
@@ -46,7 +69,6 @@
 
 
     </div>
-
     <div class="table-wrapper">
     <table class="myOtherTable">
         <!-- Header Row -->
@@ -95,6 +117,7 @@
         </tr>
     </table>
 </div>
+
 
 
 
