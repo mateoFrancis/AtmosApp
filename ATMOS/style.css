@@ -41,7 +41,7 @@ body {
     justify-content: center; 
     font-family: Georgia, 'Times New Roman', Times, serif;
 }
-
+/*
 #animation{
     z-index: 2;
     position:fixed;
@@ -55,32 +55,39 @@ body {
     background-size: 100% auto;
     background-repeat: no-repeat;
     background-position:center;
-    */
-}
+    
+}*/
 
 #sidebar{
     position:fixed;
     right:0;
-    top: 6vh;
+    top: 2vh;
    /* background-color: #ebedeb; */
-    height:94vh;
-    width: 15vw;
+    height:7vh;
+    width: 30vw;
     text:#E5E5E5;
     font-size: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
 }
 #sidebar a {
-    padding: 8px 8px 8px 32px;
+    padding: 6px;
     text-decoration: none;
     font-size: 25px;
     color: #6d22b8;
-    display: block;
+    display: inline-block;
     transition: 0.3s;
+    margin: 0 15px;
+    z-index: 101;
   }
 
   #sidebar a:hover{
     color: #dce4ef;
     transition: 0.3s;
     background-color:#8f40d9 ;
+    border-radius: 4px;
 
   }
 #map {
@@ -128,7 +135,6 @@ hr.solid {
 #legendTextTop{
     position:absolute;
     top: 6vh;
-    left: 10vh;
     color: black;
 }
 
@@ -168,3 +174,7 @@ table, th, td {
     /*border: 1px solid rgb(224, 20, 20);*/
   }
 
+#select{
+    color: white;
+    position: absolute;
+}
