@@ -38,6 +38,7 @@
         </div>
 
 
+        <div id = 'live'>
         <form id="select" method="post">
             <label for="zip">Zip code:</label>
             <select id="zip" name="zip">
@@ -62,6 +63,7 @@
 
             <input id ='button' type="submit" value="Submit">
         </form>
+        </div>
 
 
 
