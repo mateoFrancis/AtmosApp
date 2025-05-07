@@ -10,7 +10,7 @@
         <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyARVBJUMdn8K-mZWJrbbVHgtMEnd30kitg&libraries=marker"></script>
     </head>
     
-    <body onload="initMap(); test_marker();">
+    <body onload="initMap();">
 
         <div id = 'logo'>
             <p>Atmos</p> 

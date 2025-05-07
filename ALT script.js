@@ -1,3 +1,6 @@
+//Same as script.js but table only hold data for marker you click on
+
+
 //This function creates the initial map.
 async function initMap() {
     //creates map and marker/pin element and info window
@@ -410,13 +413,16 @@ function centerMap(lat, long){
 
 
 
-
+function test_marker(){
+    makeMarker(34.0522, -118.2437, 0, 90001, "Los Angeles", "2025-04-26 01:42 PM PDT", "sunny", 75, 63, 80.5, 15.2, 10, 0.5, "clear", "suny");
+    makeMarker(33.9737, -118.2488, 1, 90002, "Los Angeles", "2025-04-26 02:10 PM PDT", "partly cloudy", 72, 60, 78.2, 10.1, 9, 0.7, "partly cloudy", "awesome!");
+}
 
   
 
-async function makeMarker(Lat, Long, id, zip, city,time, weather, temperature, min_temp, max_temp, humidity, wind_speed, degree, cloud_coverage, weath_desciptor ) {
+async function makeMarker(Lat, Long, id, zip, city, time, weather, temperature, min_temp, max_temp, humidity, wind_speed, degree, cloud_coverage, weath_desciptor) {
     const { Map } = await google.maps.importLibrary("maps");
-    // creates a map if none exists
+  
     if (!window.map) {
       window.map = new Map(document.getElementById("map"), {
         center: { lat: 34.0549, lng: -118.2426 },
@@ -424,164 +430,109 @@ async function makeMarker(Lat, Long, id, zip, city,time, weather, temperature, m
         mapId: 'b32f4d216a605f57',
       });
     }
-
-
-
-
   
-    // calculates color using FFWI 
-    //FFWI = (n*sqr(1+U^2))/0.3002 where u is wind speed
-    //n = 1-2 *(EMC/30) + 1.5* (EMC/30)^2 -0.5(EMC/30)^3
-    //EMC formula changes depending on humidity.
-
-    //Calculating EMC
-    
+    // Calculate EMC
     let EMC = 0;
     if (humidity < 10)
-        EMC = 0.03229+0.281073 * humidity - 0.000578 * humidity * temperature;
-    else if(humidity >= 10 && humidity < 50)
-        EMC = 2.22749 + 0.160107 * humidity - 0.01478 * temperature;
-    else if(humidity >= 50)
-        EMC = 21.0606 + 0.005565 * (humidity*humidity) - 0.00035 * humidity * temperature - 0.483199 * humidity
-
-    //using EMC to calculate n
-    let n = 1 - 2 * (EMC/30) + 1.5 * (EMC/30 * EMC/30) - 0.5 * (EMC/30 * EMC/30 *EMC/30);
-
-    //calculating index FFWI and converting it to 1-5 severity.
-    let FFWI = (n * Math.sqrt(1 + (wind_speed*wind_speed)))/0.3002;
-    console.log(FFWI);
-    //scale of 0-100, where any number greater than 100 is set back to 100
-    if(FFWI > 100){
-        FFWI = 100;
-    }
-
-
-
-    //Creates HTML to put on MAP
-const table = document.querySelector('.myOtherTable');
-
-  // 1) Header / Data section 1
-  const hdr1 = document.createElement('tr');
-  hdr1.innerHTML = `
-    <th>Zip Code</th>
-    <th>City</th>
-    <th>Timestamp</th>
-    <th>Weather</th>
-  `;
-  const data1 = document.createElement('tr');
-  data1.innerHTML = `
-    <td>${zip}</td>
-    <td>${city}</td>
-    <td>${time}</td>
-    <td>${weather}</td>
-  `;
-
-  // 2) Header / Data section 2
-  const hdr2 = document.createElement('tr');
-  hdr2.innerHTML = `
-    <th>Temperature</th>
-    <th>Min Temp</th>
-    <th>Max Temp</th>
-    <th>Humidity</th>
-  `;
-  const data2 = document.createElement('tr');
-  data2.innerHTML = `
-    <td>${temperature}</td>
-    <td>${min_temp}</td>
-    <td>${max_temp}</td>
-    <td>${humidity}</td>
-  `;
-
-  // 3) Header / Data section 3
-  const hdr3 = document.createElement('tr');
-  hdr3.innerHTML = `
-    <th>Wind Speed</th>
-    <th>Wind Direction</th>
-    <th>Cloud Coverage</th>
-    <th>Weather Description</th>
-  `;
-  const data3 = document.createElement('tr');
-  data3.innerHTML = `
-    <td>${wind_speed}</td>
-    <td>${degree}</td>
-    <td>${cloud_coverage}</td>
-    <td>${weath_desciptor}</td>
-  `;
-
-  const spacer = document.createElement('tr');
-spacer.innerHTML = `
-  <td colspan="4" style="height: 10px; background-color: transparent;"></td>
-`;
-
-    //Adds data to map
-  [hdr1, data1, hdr2, data2, hdr3, data3, spacer].forEach(row => {
-    table.appendChild(row);
-  });
-
-
-
-
-
-    //Sets severiy for the index
-    let iconURL = '';
-
-    if (FFWI < 34) {
-      iconURL = 'fire_imgs/GreenFire.png'
-      //green
-    } else if (FFWI < 67) {
-       iconURL = 'fire_imgs/OrangeFire.png'
-      //orange
-    } else if (FFWI >= 67) {
-        iconURL = 'fire_imgs/OrangeFire.png'
-       //orange
-    }
+      EMC = 0.03229 + 0.281073 * humidity - 0.000578 * humidity * temperature;
+    else if (humidity >= 10 && humidity < 50)
+      EMC = 2.22749 + 0.160107 * humidity - 0.01478 * temperature;
+    else if (humidity >= 50)
+      EMC = 21.0606 + 0.005565 * (humidity * humidity) - 0.00035 * humidity * temperature - 0.483199 * humidity;
   
-    // Create marker depending on what pin is set to.
-      const marker = new google.maps.Marker({
+    // Calculate FFWI
+    let n = 1 - 2 * (EMC / 30) + 1.5 * Math.pow(EMC / 30, 2) - 0.5 * Math.pow(EMC / 30, 3);
+    let FFWI = (n * Math.sqrt(1 + wind_speed * wind_speed)) / 0.3002;
+    if (FFWI > 100) FFWI = 100;
+  
+    // Choose icon based on severity
+    let iconURL = '';
+    if (FFWI < 34) {
+      iconURL = 'fire_imgs/GreenFire.png';
+    } else if (FFWI < 67) {
+      iconURL = 'fire_imgs/OrangeFire.png';
+    } else if (FFWI >= 67){
+      iconURL = 'fire_imgs/RedFire.png';
+    } 
+    
+  
+    // Create the marker
+    const marker = new google.maps.Marker({
       map: window.map,
       position: { lat: parseFloat(Lat), lng: parseFloat(Long) },
       title: 'Fire',
       icon: {
-          url: iconURL,
-          scaledSize: new google.maps.Size(35, 35),
-        },
+        url: iconURL,
+        scaledSize: new google.maps.Size(35, 35),
+      },
     });
-
-
-  //constructs infowindow
-  const content = `
-    <div class="feh-content">
-      <p class="feh-content-description">Fire #${id}</p>
-      <p class="feh-content-description">Latitude: ${Lat}°F </p>
-      <p class="feh-content-description">Longitude: ${Long}% </p>
-      <p class="feh-content-description">Time (PST): ${time} </p>
-      <p class="feh-content-description">Weather: ${weather} </p>
-      <p class="feh-content-description">Severity Index: ${FFWI.toFixed(3)} </p>
-    </div>
-  `;
   
-  const infoWindow = new google.maps.InfoWindow({
-    content: content,
-    minWidth: 200,
-    maxWidth: 200,
-  });
-  window.currentInfoWindow = infoWindow;
-    //removes old info-window if you click a new one.
+    // InfoWindow content
+    const content = `
+      <div class="feh-content">
+        <p class="feh-content-description">Fire #${id}</p>
+        <p class="feh-content-description">Latitude: ${Lat}</p>
+        <p class="feh-content-description">Longitude: ${Long}</p>
+        <p class="feh-content-description">Time (PST): ${time}</p>
+        <p class="feh-content-description">Weather: ${weather}</p>
+        <p class="feh-content-description">Severity Index: ${FFWI.toFixed(3)}</p>
+      </div>
+    `;
+  
+    const infoWindow = new google.maps.InfoWindow({
+      content: content,
+      minWidth: 200,
+      maxWidth: 200,
+    });
+  
+    // Marker click handler
     marker.addListener('click', () => {
-      //close old info window if new one opens
       if (window.currentInfoWindow) {
-          window.currentInfoWindow.close();
-        }
-    infoWindow.setContent(content);
-    infoWindow.open(window.map, marker);
-    //track info windows to close old one
-    window.currentInfoWindow = infoWindow;
-  });
-
-  infoWindow.addListener('closeclick', function() {
-    window.map.fitBounds(window.bounds);
-  });
+        window.currentInfoWindow.close();
+      }
+      infoWindow.setContent(content);
+      infoWindow.open(window.map, marker);
+      window.currentInfoWindow = infoWindow;
+  
+      // Update the table with fire data
+      const table = document.querySelector('.myOtherTable');
+      table.innerHTML = ''; // Clear previous rows
+  
+      const rows = [
+        [
+          ['Zip Code', 'City', 'Timestamp', 'Weather'],
+          [zip, city, time, weather]
+        ],
+        [
+          ['Temperature', 'Min Temp', 'Max Temp', 'Humidity'],
+          [temperature, min_temp, max_temp, humidity]
+        ],
+        [
+          ['Wind Speed', 'Wind Direction', 'Cloud Coverage', 'Weather Description'],
+          [wind_speed, degree, cloud_coverage, weath_desciptor]
+        ]
+      ];
+  
+      rows.forEach(([headers, data]) => {
+        const hdrRow = document.createElement('tr');
+        hdrRow.innerHTML = headers.map(h => `<th>${h}</th>`).join('');
+        const dataRow = document.createElement('tr');
+        dataRow.innerHTML = data.map(d => `<td>${d}</td>`).join('');
+        table.appendChild(hdrRow);
+        table.appendChild(dataRow);
+      });
+  
+      const spacer = document.createElement('tr');
+      spacer.innerHTML = `<td colspan="4" style="height: 10px; background-color: transparent;"></td>`;
+      table.appendChild(spacer);
+    });
+  
+    // InfoWindow close handler
+    infoWindow.addListener('closeclick', function () {
+      window.map.fitBounds(window.bounds);
+    });
   }
+  
 
 
 
