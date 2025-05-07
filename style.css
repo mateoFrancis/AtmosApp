@@ -10,7 +10,7 @@ body {
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: cover;
-  }
+}
   
 
 #content {
@@ -58,38 +58,35 @@ body {
     
 }*/
 
-#sidebar{
-    position:fixed;
-    right:0;
-    top: 2vh;
-   /* background-color: #ebedeb; */
-    height:7vh;
-    width: 30vw;
-    text:#E5E5E5;
-    font-size: 25px;
+#sidebar {
+    position: fixed;
+    top: 2%;
+    right: 2%;
     display: flex;
+    gap: 20px;
+    height: 6vh;
     align-items: center;
-    justify-content: center;
     z-index: 100;
 }
+
 #sidebar a {
-    padding: 6px;
     text-decoration: none;
-    font-size: 25px;
+    font-size: 1.2vw;
     color: #6d22b8;
-    display: inline-block;
+    display: flex;
+    align-items: center;
+    gap: 6px;
     transition: 0.3s;
-    margin: 0 15px;
-    z-index: 101;
-  }
+}
 
-  #sidebar a:hover{
+#sidebar a:hover {
     color: #dce4ef;
-    transition: 0.3s;
-    background-color:#8f40d9 ;
+    background-color: #8f40d9;
     border-radius: 4px;
+    padding: 4px 8px;
+}
 
-  }
+  
 #map {
     position: absolute;
     top: 5vh;
@@ -105,32 +102,40 @@ hr.solid {
     border-top: 3px solid #bbb;
 }
 
-
-#legend{
+#legend {
     position: absolute;
-    background: #dce4ef;
-    top:5vh;
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
+    top: 5vh;
     width: 5vw;
-    left:10vw;
-    height:63vh;
+    left: 10vw;
+    height: 63vh;
     border-top-left-radius: 30px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;  /* Keeps the items centered */
 }
 
-#legendTop{
-    position:absolute;
-    background: #ede8f0;
-    top:0vh;
+
+#legendTop {
+    position: absolute;
+    background-color: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    top: 0vh;
     width: 5vw;
-    left:0;
-    height:7vh;
+    left: 0;
+    height: 7vh;
     color: white;
     display: flex;
-    align-items: center;  
-    justify-content: center; 
+    align-items: center;
+    justify-content: center;
     font-family: Georgia, 'Times New Roman', Times, serif;
     border-top-left-radius: 30px;
-
 }
+
 
 #legendTextTop{
     position:absolute;
@@ -178,3 +183,63 @@ table, th, td {
     color: white;
     position: absolute;
 }
+
+.fire-icon {
+    width: 5vw;
+    height: auto;
+    margin: 10vh 0;  /* Adds space between images, adjust the value as needed */
+    display: block;
+}
+
+/* Table Styling */
+.table-wrapper {
+    max-width: 100%;
+    padding: 0 5vw; /* Adds horizontal breathing room */
+    box-sizing: border-box;
+}
+
+.myOtherTable {
+    width: 100%;
+    background-color: transparent;
+    border-collapse: collapse;
+    color: #ffffff;
+    font-size: 18px;
+    margin: 40px auto 80px auto;
+}
+
+
+.myOtherTable th {
+    background-color: #000000;
+    color: #6d22b8;
+    font-variant: small-caps;
+    border-left: 1px solid #000000;
+    border-right: 1px solid #000000;
+}
+
+.myOtherTable td, .myOtherTable th {
+    padding: 10px;
+}
+
+.myOtherTable td {
+    font-family: Georgia, Garamond, serif;
+    border-top: 1px solid #000000;
+    border-left: 1px solid #000000;
+    border-right: 1px solid #000000;
+}
+
+/* Remove edge borders */
+.myOtherTable td:first-child,
+.myOtherTable th:first-child {
+    border-left: none;
+}
+.myOtherTable td:last-child,
+.myOtherTable th:last-child {
+    border-right: none;
+}
+
+/* Section dividers */
+.myOtherTable tr:nth-child(3),
+.myOtherTable tr:nth-child(5) {
+    border-top: 2px solid #000000;
+}
+

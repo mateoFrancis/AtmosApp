@@ -1,0 +1,155 @@
+
+body {
+    margin: 0; 
+    min-height: 100vh; 
+    background: linear-gradient(
+      337deg,
+      rgba(84, 39, 156, 1) 0%,
+      rgba(45, 21, 87, 1) 40%,
+      rgba(0, 0, 0, 1) 80%
+    );
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+@import url('https://fonts.googleapis.com/css?family=Montserrat:500');
+
+.showcase div {
+    text-align: center;
+    color: #ffffff;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+}
+
+/* Add individual font sizes to maintain structure and readability */
+.showcase h1 {
+    font-size: 3em;
+    margin-bottom: 0.2em;
+}
+
+.showcase h2 {
+    font-size: 2em;
+    margin-bottom: 0.2em;
+}
+
+.showcase h3 {
+    font-size: 1.5em;
+    margin-bottom: 0.2em;
+}
+
+.showcase p {
+    font-size: 1em;
+    max-width: 600px;
+    margin: 0.5em auto;
+    line-height: 1.5em;
+}
+
+.showcase button{
+    background-color: #6d22b8;    
+    border: none;
+    color: #FFFFFF;
+    padding: 16px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 24px;
+    margin: 8px 2px;
+    transition-duration: 0.4s;
+    cursor: pointer;
+}
+.signup div{
+    background-color:#616D72;
+    text-align: center;
+    border-radius: 10px;
+    color: #ffffff;
+    width: 400px;
+    height: 500px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+}
+
+.signup h2{
+    font-size: 2em;
+    color: #000000;
+}
+.signup input{
+    transform: translateY(-100%);
+    color: #000000;
+}
+.signup button{
+    background-color: #cc453D;
+    border: none;
+    color: #FFFFFF;
+    padding: 16px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 24px;
+    margin: 8px 2px;
+    transition-duration: 0.4s;
+    cursor: pointer;
+}
+
+
+
+
+#google-map{
+    position: absolute;
+    left:50%;
+    top: 50%;
+    border: 1px solid #ccc;
+    width: 900px;
+    height: 700px;
+    margin: 0 auto;
+    transform: translateX(-50%) translateY(-50%)
+}
+
+
+li, a, button{
+    /*font-family: Georgia, 'Times New Roman', Times, serif;*/
+    font-weight: 500;
+    font-size: 16px;
+    color: #edf0f1;
+    text-decoration: none;
+}
+
+header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding:30px 10%
+}
+
+.nav_links {
+    list-style: none;
+}
+
+.nav_links li {
+    display: inline-block;
+    padding: 0px 20px;
+}
+
+.nav_links li a {
+    transition: all 0.3s ease 0s;
+}
+.nav_links li a:hover {
+    color: #0088a9;
+}
+
+.feh-content * {
+    /*font-family: Georgia, 'Times New Roman', Times, serif;*/
+}
+.feh-content p {
+    font-weight: 500;
+    margin-bottom: 10px;
+    line-height: 18px;
+}
