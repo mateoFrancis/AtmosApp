@@ -3,6 +3,8 @@ let map;
 let pendingActions = [];
 let currentInfoWindow;
 
+window.onbeforeunload = null;
+
 // Queue map-dependent actions
 function whenMapReady(fn) {
   if (map) {
@@ -406,9 +408,16 @@ function centerMap(lat, long) {
   });
 }
 
+
+//echo "console.log('Calling addPin with:', $latitude, $longitude, $bright, '$time', $days);";
+
 // Function to add fire markers to map
 async function addPin(Lat, Long, bright, time, day) {
-  console.log(Lat, Long, bright, time, day);
+
+  //console.log(Lat, Long, bright, time, day);
+
+  const brightC = bright - 273.15;
+  const brightF = (brightC * 9/5) + 32;
   
   whenMapReady(async () => {
     try {
@@ -438,7 +447,7 @@ async function addPin(Lat, Long, bright, time, day) {
         <div class="feh-content">
           <p class="feh-content-description">Latitude: ${Lat}</p>
           <p class="feh-content-description">Longitude: ${Long}</p>
-          <p class="feh-content-description">Brightness: ${bright}</p>
+          <p class="feh-content-description">Temperature: ${bright} K, ${brightF.toFixed(2)} °F</p>
           <p class="feh-content-description">Reported At: ${time}</p>
           <p class="feh-content-description">Reported ${day} day(s) ago</p>
         </div>
