@@ -410,11 +410,16 @@ function centerMap(lat, long){
 
 
 
-
-
+/*
+function test_marker(){
+    makeMarker(33.96553, -118.22328, 0, 42.7, 74.8, 12.4, 327.69, 310, "2025-04-26 01:42 PM PDT", 90001, 'sunny')
+    makeMarker(33.82178, -118.24393, 1, 85.1, 91.2, 5.7, 297.41, 90, "2025-04-27 02:05 AM PDT", 90066, 'cloudy')
+    makeMarker(33.82178, -118.24939, 2, 66.3, 82, 8, 301.44, 27, "2025-04-27 02:05 AM PDT" ,90401, 'rainy' )
+  };
+  */
   
 
-async function makeMarker(Lat, Long, id, zip, city,time, weather, temperature, min_temp, max_temp, humidity, wind_speed, degree, cloud_coverage, weath_desciptor ) {
+async function makeMarker(Lat, Long, id, humidity, temperature, wind_speed, degree, bright, time, zip, weather ) {
     const { Map } = await google.maps.importLibrary("maps");
     // creates a map if none exists
     if (!window.map) {
@@ -451,90 +456,47 @@ async function makeMarker(Lat, Long, id, zip, city,time, weather, temperature, m
     let FFWI = (n * Math.sqrt(1 + (wind_speed*wind_speed)))/0.3002;
     console.log(FFWI);
     //scale of 0-100, where any number greater than 100 is set back to 100
-    if(FFWI > 100){
-        FFWI = 100;
-    }
 
 
 
-    //Creates HTML to put on MAP
-const table = document.querySelector('.myOtherTable');
+      //adds data to live updates
+      document.getElementById("live").innerHTML += `At ${time} a severity ${FFWI.toFixed(3)} fire at ${FFWI.toFixed(3)}. &nbsp;&nbsp;&nbsp;`;
 
-  // 1) Header / Data section 1
-  const hdr1 = document.createElement('tr');
-  hdr1.innerHTML = `
-    <th>Zip Code</th>
-    <th>City</th>
-    <th>Timestamp</th>
-    <th>Weather</th>
-  `;
-  const data1 = document.createElement('tr');
-  data1.innerHTML = `
+    // adds data to the table
+    let newrow = document.createElement('tr');
+
+    newrow.innerHTML = `<td>${id}</td> 
     <td>${zip}</td>
-    <td>${city}</td>
     <td>${time}</td>
-    <td>${weather}</td>
-  `;
+     <td>${FFWI.toFixed(3)}</td>
+    <td>${temperature}°F</td>
+    <td>${humidity}%</td>
+    <td>${wind_speed}mph / ${degree}°</td>
+    <td>${weather}</td>`
 
-  // 2) Header / Data section 2
-  const hdr2 = document.createElement('tr');
-  hdr2.innerHTML = `
-    <th>Temperature</th>
-    <th>Min Temp</th>
-    <th>Max Temp</th>
-    <th>Humidity</th>
-  `;
-  const data2 = document.createElement('tr');
-  data2.innerHTML = `
-    <td>${temperature}</td>
-    <td>${min_temp}</td>
-    <td>${max_temp}</td>
-    <td>${humidity}</td>
-  `;
+    let tablebody = document.querySelector('#fireTable tbody');
+    tablebody.appendChild(newrow);
 
-  // 3) Header / Data section 3
-  const hdr3 = document.createElement('tr');
-  hdr3.innerHTML = `
-    <th>Wind Speed</th>
-    <th>Wind Direction</th>
-    <th>Cloud Coverage</th>
-    <th>Weather Description</th>
-  `;
-  const data3 = document.createElement('tr');
-  data3.innerHTML = `
-    <td>${wind_speed}</td>
-    <td>${degree}</td>
-    <td>${cloud_coverage}</td>
-    <td>${weath_desciptor}</td>
-  `;
-
-  const spacer = document.createElement('tr');
-spacer.innerHTML = `
-  <td colspan="4" style="height: 10px; background-color: transparent;"></td>
-`;
-
-    //Adds data to map
-  [hdr1, data1, hdr2, data2, hdr3, data3, spacer].forEach(row => {
-    table.appendChild(row);
-  });
-
-
-
-
-
+    
     //Sets severiy for the index
     let iconURL = '';
 
-    if (FFWI < 34) {
-      iconURL = 'fire_imgs/GreenFire.png'
+    if (FFWI < 21) {
+      iconURL = 'images/green.png'
       //green
-    } else if (FFWI < 67) {
-       iconURL = 'fire_imgs/OrangeFire.png'
+    } else if (FFWI < 41) {
+      iconURL ='images/blue.png'
+      //blue
+    } else if (FFWI < 61) {
+      iconURL = 'images/yellow.png'
+      //yellow
+    } else if (FFWI < 81) {
+       iconURL = 'images/orange.png'
       //orange
-    } else if (FFWI >= 67) {
-        iconURL = 'fire_imgs/OrangeFire.png'
-       //orange
-    }
+    } else if (FFWI >= 81) {
+       iconURL = 'images/red.png'
+      //red
+    } 
   
     // Create marker depending on what pin is set to.
       const marker = new google.maps.Marker({
@@ -554,6 +516,7 @@ spacer.innerHTML = `
       <p class="feh-content-description">Fire #${id}</p>
       <p class="feh-content-description">Latitude: ${Lat}°F </p>
       <p class="feh-content-description">Longitude: ${Long}% </p>
+      <p class="feh-content-description">Brightness (K): ${bright}% </p>
       <p class="feh-content-description">Time (PST): ${time} </p>
       <p class="feh-content-description">Weather: ${weather} </p>
       <p class="feh-content-description">Severity Index: ${FFWI.toFixed(3)} </p>

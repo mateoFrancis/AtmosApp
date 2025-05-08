@@ -1,5 +1,4 @@
-<?php
-
+<?php 
 $LA_fires = []; // global array of fire records
 
 function fetchFIRMSData($daysRange) {
@@ -61,9 +60,11 @@ function fetchFIRMSData($daysRange) {
 }
 
 $days = 8;
-fetchFIRMSData($days);
+//fetchFIRMSData($days);
 
 // print array
+
+/*
 foreach ($LA_fires as $index => $fire) { // n = 0; n++
 
     echo "Fire #$index\n";
@@ -73,4 +74,5 @@ foreach ($LA_fires as $index => $fire) { // n = 0; n++
     echo "Time (PST): {$fire[3]}<br>\n"; // date and time LA_fires[n][4]
     echo "---------------------------<br>\n";
 }
+    */
 ?>

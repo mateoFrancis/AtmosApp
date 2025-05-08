@@ -254,3 +254,7 @@ table, th, td {
     border-top: 2px solid #000000;
 }
 
+th {
+    text-align: center;
+}
+

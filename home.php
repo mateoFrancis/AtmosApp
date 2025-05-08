@@ -1,3 +1,8 @@
+<?php 
+ob_start();
+   require('tools.php');
+?>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -15,7 +20,6 @@
         <div id = 'logo'>
             <p>Atmos</p> 
         </div>
-        <br><br><br><br><br><br>
 
         <!-- <div id = 'animation'>  </div> -->
 
@@ -27,9 +31,13 @@
         
         <div id="content">
 
-        <div id = "map"></div>
+        <div style="margin-top: 30px;" id="map" ></div>
 
-        <div id="legend">
+        <?php
+        ?>
+
+
+        <div style="margin-top: 30px;" id="legend">
             <center> 
                 <img src="./fire_imgs/RedFire.png" class="fire-icon">
                 <img src="./fire_imgs/OrangeFire.png" class="fire-icon">
@@ -39,12 +47,16 @@
 
 
         <div id = 'live'>
-        <form id="select" method="post">
+        <form style="margin-top: 30px;" id="select" method="POST" action="<?php echo $_SERVER['PHP_SELF'];?>">
             <label for="zip">Zip code:</label>
             <select id="zip" name="zip">
-                <?php foreach ($zipCodes as $zip): ?>
-                    <option value="<?php echo htmlspecialchars($zip); ?>"><?php echo htmlspecialchars($zip); ?></option>
-                <?php endforeach; ?>
+
+                <?php
+                 foreach ($zip_keys as $zip) {
+                    echo "<option value= {$zip}> {$zip} </option>";
+                 }
+                 ?>
+
             </select>
         
             <label for="days">Fire Data Range (days)</label>
@@ -71,56 +83,57 @@
 
 
     </div>
-    <div class="table-wrapper">
-    <table class="myOtherTable">
-        <!-- Header Row -->
-        <tr>
-            <th>Zip Code</th>
-            <th>City</th>
-            <th>Timestamp</th>
-            <th>Weather</th>
-        </tr>
-        <!-- Row 1 -->
-        <tr>
-            <td id="zip_code">Placeholder for Zip Code</td>
-            <td id="city_name">Placeholder for City</td>
-            <td id="timestamp_utc">Placeholder for Timestamp</td>
-            <td id="weather_main">Placeholder for Weather Main</td>
-        </tr>
+    <br><br><br><br>
+    <div class="table-wrapper" style="margin-top: 100px;  padding-bottom: 40px; text-align: center;">
+    <table class="myOtherTable" style="margin: 0 auto;"> 
+    <!-- Header Row -->
+    <tr>
+        <th>Zip Code</th>
+        <th>City/Neighborhood</th>
+        <th>Timestamp</th>
+        <th>Weather</th>
+    </tr>
+    <!-- Row 1 -->
+    <tr>
+        <td><?php echo isset($weather_data['zip_code']) ? $weather_data['zip_code'] : 'N/A'; ?></td>
+        <td><?php echo isset($weather_data['name']) ? $weather_data['name'] : 'N/A'; ?></td>
+        <td><?php echo isset($weather_data['timestamp_utc']) ? $weather_data['timestamp_utc'] : 'N/A'; ?></td>
+        <td><?php echo isset($weather_data['weather_main']) ? $weather_data['weather_main'] : 'N/A'; ?></td>
+    </tr>
 
-        <!-- Header Row -->
-        <tr>
-            <th>Temperature</th>
-            <th>Min Temp</th>
-            <th>Max Temp</th>
-            <th>Humidity</th>
-        </tr>
-        <!-- Row 2 -->
-        <tr>
-            <td id="temperature">Placeholder for Temperature</td>
-            <td id="temp_min">Placeholder for Min Temp</td>
-            <td id="temp_max">Placeholder for Max Temp</td>
-            <td id="humidity">Placeholder for Humidity</td>
-        </tr>
+    <!-- Header Row -->
+    <tr>
+        <th>Temperature</th>
+        <th>Min Temp</th>
+        <th>Max Temp</th>
+        <th>Humidity</th>
+    </tr>
+    <!-- Row 2 -->
+    <tr>
+        <td><?php echo isset($weather_data['temperature']) ? $weather_data['temperature'] : 'N/A'; ?></td>
+        <td><?php echo isset($weather_data['temp_min']) ? $weather_data['temp_min'] : 'N/A'; ?></td>
+        <td><?php echo isset($weather_data['temp_max']) ? $weather_data['temp_max'] : 'N/A'; ?></td>
+        <td><?php echo isset($weather_data['humidity']) ? $weather_data['humidity'] : 'N/A'; ?></td>
+    </tr>
 
-        <!-- Header Row -->
-        <tr>
-            <th>Wind Speed</th>
-            <th>Wind Direction</th>
-            <th>Cloud Coverage</th>
-            <th>Weather Description</th>
-        </tr>
-        <!-- Row 3 -->
-        <tr>
-            <td id="wind_speed">Placeholder for Wind Speed</td>
-            <td id="wind_deg">Placeholder for Wind Direction</td>
-            <td id="cloud_coverage">Placeholder for Cloud Coverage</td>
-            <td id="weather_description">Placeholder for Weather Description</td>
-        </tr>
-    </table>
+    <!-- Header Row -->
+    <tr>
+        <th>Wind Speed</th>
+        <th>Wind Direction</th>
+        <th>Cloud Coverage</th>
+        <th>Weather Description</th>
+    </tr>
+    <!-- Row 3 -->
+    <tr>
+        <td><?php echo isset($weather_data['wind_speed']) ? $weather_data['wind_speed'] : 'N/A'; ?></td>
+        <td><?php echo isset($weather_data['wind_deg']) ? $weather_data['wind_deg'] : 'N/A'; ?></td>
+        <td><?php echo isset($weather_data['cloud_coverage']) ? $weather_data['cloud_coverage'] : 'N/A'; ?></td>
+        <td><?php echo isset($weather_data['weather_description']) ? $weather_data['weather_description'] : 'N/A'; ?></td>
+    </tr>
+</table>
 </div>
 
-
+<br><br><br><br><br><br>
 
 
     </body>

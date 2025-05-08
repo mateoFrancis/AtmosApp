@@ -1,8 +1,7 @@
-<?php
+<?php 
 require_once('tools.php');
 
 $weather_data = array();
-
 
 function fetch_and_store_weather($zipCode) {
     global $weather_data;
@@ -32,12 +31,12 @@ function fetch_and_store_weather($zipCode) {
         return false;
     }
 
-    echo "<pre>{$response}</pre>";
+   // echo "<pre>{$response}</pre>";
 
-    // store is array
+    // store in array
     $weather_data = array(
         'zip_code' => $zipCode,
-        'city_name' => $weatherData['name'],
+        'name' => $weatherData['name'],
         'temperature' => $weatherData['main']['temp'],
         'temp_min' => $weatherData['main']['temp_min'],
         'temp_max' => $weatherData['main']['temp_max'],
@@ -47,18 +46,19 @@ function fetch_and_store_weather($zipCode) {
         'cloud_coverage' => $weatherData['clouds']['all'],
         'weather_main' => $weatherData['weather'][0]['main'],
         'weather_description' => $weatherData['weather'][0]['description'],
-        'timestamp_utc' => gmdate("Y-m-d H:i:s", $weatherData['dt'])
+        'timestamp_utc' => (new DateTime('@' . $weatherData['dt']))
+                            ->modify('+' . $weatherData['timezone'] . ' seconds')
+                            ->format('h:i:s A, Y-m-d') // 12-hour format with AM/PM
     );
-
-    echo "Weather data for $zipCode fetched and stored in array successfully.\n\n";
     
-    echo "<pre>";
-    print_r($weather_data);
-    echo "</pre>";
+    
+
+   // echo "Weather data for $zipCode fetched and stored in array successfully.\n\n";
+ 
 
     return true;
 }
 
-fetch_and_store_weather("90001");
+//fetch_and_store_weather("90001");
 
 ?>

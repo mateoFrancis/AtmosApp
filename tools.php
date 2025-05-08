@@ -1,5 +1,6 @@
 <?php 
-//require_once("config.php");
+require_once('api_OpenWeatherMap.php');
+require_once('api_FIRMS.php');
 
 $servername = "localhost";                                                      
 $username = "Francis";
@@ -57,6 +58,18 @@ $LA_zips = [
     '91606' => [34.187, -118.392],   '91607' => [34.165, -118.396]
 ];
 
+$zip_keys = array_keys($LA_zips);
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
+    $zip = $_POST['zip'];
+    $days = $_POST['days'];
+
+    $location = $LA_zips[$zip];
+
+    fetch_and_store_weather($zip);
+    fetchFIRMSData($days);
+}
 
 function getConnection() {
 
