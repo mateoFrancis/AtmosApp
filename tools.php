@@ -60,7 +60,12 @@ $LA_zips = [
 
 $zip_keys = array_keys($LA_zips);
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
+$zip = "";
+$days = "";
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {;
+
+    global $zip, $days;
 
     $zip = $_POST['zip'];
     $days = $_POST['days'];

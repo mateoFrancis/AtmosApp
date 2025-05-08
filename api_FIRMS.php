@@ -7,8 +7,7 @@ function fetchFIRMSData($daysRange) {
 
     $apiKey = '8bb5676cb3d5959ba7fcdc0d4bfe7daa';
     $source = 'VIIRS_NOAA20_NRT';
-    //$coords = '-124.48,32.45,-114.13,42.00'; // Covers all of California  
-    $coords = '-118.72,33.70,-118.15,34.34';
+    $coords = '-118.72,33.70,-118.15,34.34'; // Coordinates for California
 
     $url = "https://firms.modaps.eosdis.nasa.gov/api/area/csv/{$apiKey}/{$source}/{$coords}/{$daysRange}";
 
@@ -28,12 +27,14 @@ function fetchFIRMSData($daysRange) {
     $lines = explode("\n", trim($response));
     $headers = str_getcsv(array_shift($lines)); 
 
+    $currentDate = new DateTime('now', new DateTimeZone('America/Los_Angeles'));
+
     foreach ($lines as $line) {
 
         $data = str_getcsv($line);
         if (count($data) < 14) continue; 
 
-        $latitude = (float) $data[0]; //
+        $latitude = (float) $data[0]; 
         $longitude = (float) $data[1];
         $bright_ti4_kelvin = (float) $data[2]; 
 
@@ -49,12 +50,18 @@ function fetchFIRMSData($daysRange) {
         $utcTime->setTimezone(new DateTimeZone('America/Los_Angeles'));
         $pstTimeFormatted = $utcTime->format('Y-m-d h:i A T');
 
-        // store: latitude, longitude, brightness (K), time (PST)
+        // calculate the number of days ago the fire was reported
+        $fireDate = $utcTime;
+        $interval = $currentDate->diff($fireDate);
+        $daysAgo = $interval->days; 
+
+        // store: latitude, longitude, brightness (K), time (PST), and days ago
         $LA_fires[] = [
             $latitude,
             $longitude,
             $bright_ti4_kelvin,
-            $pstTimeFormatted
+            $pstTimeFormatted,
+            $daysAgo 
         ];
     }
 }
@@ -62,17 +69,16 @@ function fetchFIRMSData($daysRange) {
 $days = 8;
 //fetchFIRMSData($days);
 
-// print array
-
+// print array (optional for testing)
 /*
-foreach ($LA_fires as $index => $fire) { // n = 0; n++
-
+foreach ($LA_fires as $index => $fire) {
     echo "Fire #$index\n";
-    echo "Latitude: {$fire[0]}\n"; // latitude LA_fires[n][0]
-    echo "Longitude: {$fire[1]}\n"; // longitude LA_fires[n][1]
-    echo "Brightness (K): {$fire[2]}\n"; // brightness LA_fires[n][2]
-    echo "Time (PST): {$fire[3]}<br>\n"; // date and time LA_fires[n][4]
+    echo "Latitude: {$fire[0]}\n"; 
+    echo "Longitude: {$fire[1]}\n"; 
+    echo "Brightness (K): {$fire[2]}\n"; 
+    echo "Time (PST): {$fire[3]}<br>\n"; 
+    echo "Days Ago: {$fire[4]}<br>\n"; // New index for days ago
     echo "---------------------------<br>\n";
 }
-    */
+*/
 ?>

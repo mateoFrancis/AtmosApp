@@ -1,4 +1,7 @@
 //This function creates the initial map.
+
+window.onbeforeunload = null;
+
 async function initMap() {
     //creates map and marker/pin element and info window
       const { Map } = await google.maps.importLibrary("maps");
@@ -413,8 +416,12 @@ function centerMap(lat, long){
 
 
   
-
+//addPin("34.33494",  "-118.51849, 297.32", "Time (PST): 2025-05-02 02:09 AM PDT", )
   async function addPin(Lat,Long, bright, time, day){
+
+    console.log(Lat,Long, bright, time, day);
+    
+    
     const { Map } = await google.maps.importLibrary("maps");
     let iconURL = '';
     if (day < 4) {

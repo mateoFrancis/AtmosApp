@@ -76,13 +76,27 @@ ob_start();
             <input id ='button' type="submit" value="Submit">
         </form>
         </div>
-
-
-
-
-
-
     </div>
+    <?php
+
+        if (isset($LA_fires) && !empty($LA_fires)) {
+        
+            echo "<script>";
+            foreach ($LA_fires as $index => $fire) {
+            
+                $latitude = $fire[0];
+                $longitude = $fire[1];
+                $bright = $fire[2];
+                $time = $fire[3];
+                $days = $fire[4]; 
+            
+                echo "addPin('$latitude', '$longitude', '$bright', '$time', $days);";
+            }
+            echo "</script>";
+        }
+
+    ?>
+
     <br><br><br><br>
     <div class="table-wrapper" style="margin-top: 100px;  padding-bottom: 40px; text-align: center;">
     <table class="myOtherTable" style="margin: 0 auto;"> 
