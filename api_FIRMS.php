@@ -75,6 +75,7 @@ $days = 8;
 // print array (optional for testing)
 /*
 foreach ($LA_fires as $index => $fire) {
+
     echo "Fire #$index\n";
     echo "Latitude: {$fire[0]}\n"; 
     echo "Longitude: {$fire[1]}\n"; 

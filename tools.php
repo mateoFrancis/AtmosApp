@@ -70,8 +70,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {;
     $zip = $_POST['zip'];
     $days = $_POST['days'];
 
-    $location = $LA_zips[$zip];
-
     fetch_and_store_weather($zip);
     fetchFIRMSData($days);
 }
