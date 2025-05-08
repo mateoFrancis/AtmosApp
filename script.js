@@ -410,13 +410,56 @@ function centerMap(lat, long){
 
 
 
-/*
-function test_marker(){
-    makeMarker(33.96553, -118.22328, 0, 42.7, 74.8, 12.4, 327.69, 310, "2025-04-26 01:42 PM PDT", 90001, 'sunny')
-    makeMarker(33.82178, -118.24393, 1, 85.1, 91.2, 5.7, 297.41, 90, "2025-04-27 02:05 AM PDT", 90066, 'cloudy')
-    makeMarker(33.82178, -118.24939, 2, 66.3, 82, 8, 301.44, 27, "2025-04-27 02:05 AM PDT" ,90401, 'rainy' )
-  };
-  */
+
+
+  
+
+  async function addPin(Lat,Long, bright, time){
+    const { Map } = await google.maps.importLibrary("maps");
+    let iconURL = 'fire_imgs/OrangeFire.png'
+    const marker = new google.maps.Marker({
+        map: window.map,
+        position: { lat: parseFloat(Lat), lng: parseFloat(Long) },
+        title: 'Fire',
+        icon: {
+            url: iconURL,
+            scaledSize: new google.maps.Size(35, 35),
+          },
+      });
+
+      //constructs infowindow
+  const content = `
+  <div class="feh-content">
+  <p class="feh-content-description">Latitude:${Lat}</p>
+ <p class="feh-content-description">Longitude:${Long}</p>
+ <p class="feh-content-description">Brightness:${bright}</p>
+ <p class="feh-content-description">Reported At:${time}</p>
+  </div>
+`;
+
+const infoWindow = new google.maps.InfoWindow({
+  content: content,
+  minWidth: 200,
+  maxWidth: 200,
+});
+window.currentInfoWindow = infoWindow;
+  //removes old info-window if you click a new one.
+  marker.addListener('click', () => {
+    //close old info window if new one opens
+    if (window.currentInfoWindow) {
+        window.currentInfoWindow.close();
+      }
+  infoWindow.setContent(content);
+  infoWindow.open(window.map, marker);
+  //track info windows to close old one
+  window.currentInfoWindow = infoWindow;
+});
+
+infoWindow.addListener('closeclick', function() {
+  window.map.fitBounds(window.bounds);
+});
+}
+
   
 
 async function makeMarker(Lat, Long, id, humidity, temperature, wind_speed, degree, bright, time, zip, weather ) {
