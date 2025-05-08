@@ -1,28 +1,27 @@
-//This function creates the initial map.
+// Global variables
+let map;
+let pendingActions = [];
+let currentInfoWindow;
 
-window.onbeforeunload = null;
+// Queue map-dependent actions
+function whenMapReady(fn) {
+  if (map) {
+    fn();
+  } else {
+    pendingActions.push(fn);
+  }
+}
 
+// Initialize map
 async function initMap() {
-    //creates map and marker/pin element and info window
-      const { Map } = await google.maps.importLibrary("maps");
-      /*const LA = {
-        north: 34.5000,
-        south: 33.6000,
-        west: -119.0000,
-        east: -117.6000,
-      };
-      */
-
-      map = new Map(document.getElementById("map"), {
+  try {
+    const { Map } = await google.maps.importLibrary("maps");
+    
+    map = new Map(document.getElementById("map"), {
       center: { lat: 34.0549, lng: -118.2426 },
       zoom: 8,
       disableDefaultUI: false,
       mapTypeControl: false,
-     // fullscreenControl: false,
-      //restriction: {
-        //latLngBounds: LA,
-        //strictBounds: true
-      //},
       styles: [
         {
             "featureType": "all",
@@ -386,100 +385,93 @@ async function initMap() {
       }
     )
     console.log("Map Loaded")
-};
 
 
-
-/*
-  function geolocateCenter(){
-    if(navigator.geolocation){ //checks if geo-location even supported before running
-    navigator.geolocation.getCurrentPosition(function(position){
-        map.setCenter({ lat: position.coords.latitude, lng: position.coords.longitude });
-    });
-    }
-    else
-        console.log("geolocation is not supported by browser");
+    
+    console.log("Map Loaded");
+    
+    // Execute any queued actions
+    pendingActions.forEach(fn => fn());
+    pendingActions = [];
+  } catch (error) {
+    console.error("Error initializing map:", error);
+  }
 }
-*/
 
-
-
-//function to center the map at whatever cordinates
-function centerMap(lat, long){
-    map.setCenter( {lat:lat, lng: long});
+// Function to center the map at specific coordinates
+function centerMap(lat, long) {
+  whenMapReady(() => {
+    map.setCenter({ lat: parseFloat(lat), lng: parseFloat(long) });
     map.setZoom(8);
+  });
 }
 
-
-
-
-
-
+// Function to add fire markers to map
+async function addPin(Lat, Long, bright, time, day) {
+  console.log(Lat, Long, bright, time, day);
   
-//addPin("34.33494",  "-118.51849, 297.32", "Time (PST): 2025-05-02 02:09 AM PDT", )
-  async function addPin(Lat,Long, bright, time, day){
-
-    console.log(Lat,Long, bright, time, day);
-    
-    
-    const { Map } = await google.maps.importLibrary("maps");
-    let iconURL = '';
-    if (day < 4) {
-        iconURL = 'fire_imgs/RedFire.png'
-        //red
+  whenMapReady(async () => {
+    try {
+      // Determine fire icon based on age
+      let iconURL = '';
+      if (day < 4) {
+        iconURL = 'fire_imgs/RedFire.png'; // recent fires (red)
       } else if (day < 7) {
-         iconURL = 'fire_imgs/OrangeFire.png'
-        //orange
+        iconURL = 'fire_imgs/OrangeFire.png'; // less recent fires (orange)
       } else {
-         iconURL = 'fire_imgs/GreenFire.png'
-        //green
-      } 
-    const marker = new google.maps.Marker({
-        map: window.map,
+        iconURL = 'fire_imgs/GreenFire.png'; // older fires (green)
+      }
+      
+      // Create marker
+      const marker = new google.maps.Marker({
+        map: map,
         position: { lat: parseFloat(Lat), lng: parseFloat(Long) },
         title: 'Fire',
         icon: {
-            url: iconURL,
-            scaledSize: new google.maps.Size(35, 35),
-          },
+          url: iconURL,
+          scaledSize: new google.maps.Size(35, 35),
+        },
       });
 
+      // Construct info window content
+      const content = `
+        <div class="feh-content">
+          <p class="feh-content-description">Latitude: ${Lat}</p>
+          <p class="feh-content-description">Longitude: ${Long}</p>
+          <p class="feh-content-description">Brightness: ${bright}</p>
+          <p class="feh-content-description">Reported At: ${time}</p>
+          <p class="feh-content-description">Reported ${day} day(s) ago</p>
+        </div>
+      `;
 
+      const infoWindow = new google.maps.InfoWindow({
+        content: content,
+        minWidth: 200,
+        maxWidth: 200,
+      });
 
-      //constructs infowindow
-  const content = `
-  <div class="feh-content">
-  <p class="feh-content-description">Latitude:${Lat}</p>
- <p class="feh-content-description">Longitude:${Long}</p>
- <p class="feh-content-description">Brightness:${bright}</p>
- <p class="feh-content-description">Reported At:${time}</p>
- <p class="feh-content-description">Reported ${day} day(s) ago</p>
-  </div>
-`;
+      // Add click listener to show info window
+      marker.addListener('click', () => {
+        // Close old info window if new one opens
+        if (currentInfoWindow) {
+          currentInfoWindow.close();
+        }
+        infoWindow.setContent(content);
+        infoWindow.open(map, marker);
+        // Track info windows to close old one
+        currentInfoWindow = infoWindow;
+      });
 
-const infoWindow = new google.maps.InfoWindow({
-  content: content,
-  minWidth: 200,
-  maxWidth: 200,
-});
-window.currentInfoWindow = infoWindow;
-  //removes old info-window if you click a new one.
-  marker.addListener('click', () => {
-    //close old info window if new one opens
-    if (window.currentInfoWindow) {
-        window.currentInfoWindow.close();
-      }
-  infoWindow.setContent(content);
-  infoWindow.open(window.map, marker);
-  //track info windows to close old one
-  window.currentInfoWindow = infoWindow;
-});
-
-infoWindow.addListener('closeclick', function() {
-  window.map.fitBounds(window.bounds);
-});
+      infoWindow.addListener('closeclick', function() {
+        if (window.bounds) {
+          map.fitBounds(window.bounds);
+        }
+      });
+    } catch (error) {
+      console.error("Error adding pin:", error);
+    }
+  });
 }
 
-  
-
-
+// Handle page unload events
+window.onbeforeunload = null;

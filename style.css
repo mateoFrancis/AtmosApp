@@ -27,7 +27,7 @@ body {
     z-index: 2;
     background-color: #000000;
     color: white;
-    position:fixed;
+    position:absolute;
     font-size: 1.5vw;
     top: 2%;
     left: 50%;
@@ -59,7 +59,7 @@ body {
 }*/
 
 #sidebar {
-    position: fixed;
+    position: absolute;
     top: 2%;
     right: 2%;
     display: flex;
@@ -93,6 +93,7 @@ body {
     left: 15vw;
     width: 70vw;
     height: 63vh;
+    max-height: 63vh;
     border-top-right-radius: 30px;
     padding: 30;
 }
